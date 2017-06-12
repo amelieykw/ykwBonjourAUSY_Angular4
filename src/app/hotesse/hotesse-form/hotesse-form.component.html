@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <!-- Button Nouveau RDV & Lister RDV -->
+        <div class="form-group">
+          <button
+            class="btn btn-primary col-xs-12"
+            type="button"
+            [disabled]="f">Nouveau RDV</button>
+          <br><br><br>
+          <button
+            class="btn btn-primary col-xs-12"
+            type="button">Liste des RDV</button>
+        </div>
+        <br><br>
+        <div id="user-data" ngModelGroup="userData">
+          <!-- Civilité -->
+          <div class="form-group">
+            <label>Civilité</label>
+            <label class="radio-inline" *ngFor="let civilite of civilites">
+              <input
+                type="radio"
+                ngModel
+                name="civilite"
+                [value]="civilite"
+                required>{{ civilite }}
+            </label>
+          </div>
+          <!-- Prénom -->
+          <div class="form-group">
+            <label for="prenom_candidat">Prénom</label>
+            <input
+              type="text"
+              id="prenom_candidat"
+              class="form-control"
+              ngModel
+              name="prenom_candidat"
+              required
+              #prenom="ngModel">
+            <span class="help-block" *ngIf="!prenom.valid && prenom.touched">Veuillez entrer le prénom!</span>
+          </div>
+          <!-- Nom -->
+          <div class="form-group">
+            <label for="nom_candidat">Nom</label>
+            <input
+              type="text"
+              id="nom_candidat"
+              class="form-control"
+              ngModel
+              name="nom_candidat"
+              required
+              #nom="ngModel">
+            <span class="help-block" *ngIf="!nom.valid && nom.touched">Veuillez entrer le nom!</span>
+          </div>
+          <!-- Recruiteur -->
+          <div class="form-group">
+            <label for="nom_recruiteur">Reçu par</label>
+            <input
+              type="text"
+              id="nom_recruiteur"
+              class="form-control"
+              ngModel
+              name="nom_recruiteur"
+              required
+              #nom_recruiteur="ngModel">
+            <span class="help-block" *ngIf="!nom_recruiteur.valid && nom_recruiteur.touched">Veuillez entrer le nom d'un recruiteur!</span>
+          </div>
+        </div>
+        <!-- Time -->
+        <div class="form-group">
+          <label>Attendu à</label>
+          <select
+            id="hour"
+            ngModel
+            name="hour"
+            required>
+            <option *ngFor="let hour of hours">{{ hour }}</option>
+          </select>
+          <select
+            id="minute"
+            ngModel
+            name="minute"
+            required>
+            <option *ngFor="let minute of minutes">{{ minute }}</option>
+          </select>
+        </div>
+        <!-- Button Valider RDV -->
+        <button
+          class="btn btn-primary col-xs-12"
+          type="submit"
+          [disabled]="!f.valid">Valider le RDV</button>
+      </form>
+    </div>
+  </div>
+</div>
