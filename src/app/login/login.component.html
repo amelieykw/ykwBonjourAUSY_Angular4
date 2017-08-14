@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    	<br><br>
+    	<button class="btn btn-primary col-xs-12" type="button" [disabled]="true">Connexion</button>
+     	<br><br><br>
+      
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+	
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text" id="username" class="form-control" 
+				required
+				name="username" ngModel #username="ngModel"/>
+			<div [hidden]="username.valid || username.pristine" class="alert alert-danger">Username is required!</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" id="password" class="form-control" 
+				required
+				name="password" ngModel #password="ngModel"/>
+			<div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required!</div>
+		</div>
+
+		<md-checkbox>Mémoriser les informations</md-checkbox>
+
+		<br><br>
+		<button class="btn btn-primary col-xs-12" type="submit" [disabled]="!loginForm.valid">Valider</button>
+		<br><br>
+
+		<a href="">J'ai oublié mon mot de passe</a>
+
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,76 @@
-<p>
-  hotesse-list-rdv works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <br>
+      <button class="btn btn-primary col-xs-12" type="button" 
+      (click)="clickButton('nouveauRDVbtn')">
+        Nouveau RDV
+      </button>
+      <br><br><br>
+      <button class="btn btn-primary col-xs-12" type="button" 
+      [disabled]="true" (click)="clickButton('listeDesRDVbtn')">
+        Liste des RDV
+      </button>
+    </div>  
+  </div>
+</div>
+
+<br>
+<div class="example-container mat-elevation-z8">
+  <md-table #table [dataSource]="dataSource" mdSort>
+    <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Prénom_candidat Column -->
+    <ng-container cdkColumnDef="prenom_candidat">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Prénom </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.rdvPrenom}} </md-cell>
+    </ng-container>
+
+    <!-- Nom_candidat Column -->
+    <ng-container cdkColumnDef="nom_candidat">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Nom </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.rdvNom}} </md-cell>
+    </ng-container>
+
+    <!-- Recruiteur Column -->
+    <ng-container cdkColumnDef="recruiteur">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Reçu par </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.contact}} </md-cell>
+    </ng-container>
+
+    <!-- HeureDuRdv Column -->
+    <ng-container cdkColumnDef="heureDeRdv">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Heure du rdv </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.HeurePrevu}} </md-cell>
+    </ng-container>
+
+    <!-- Valide Column -->
+    <ng-container cdkColumnDef="valide">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Validé </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        <md-checkbox [checked]="row.isValide" (change)="openDialog('valide', row.isValide, row.rdvId, row.rdvPrenom, row.contact)"></md-checkbox>
+      </md-cell>
+    </ng-container>
+
+    <!-- PriseEnCharge Column -->
+    <ng-container cdkColumnDef="priseEnCharge">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Prise En Charge </md-header-cell>
+      <md-cell *cdkCellDef="let row">
+        <md-checkbox [checked]="row.HeurePriseEnCharge" (change)="openDialog('priseEnCharge', row.HeurePriseEnCharge, row.rdvId, row.rdvPrenom, row.contact)"></md-checkbox>
+      </md-cell>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container cdkColumnDef="action">
+      <md-header-cell *cdkHeaderCellDef md-sort-header> Action </md-header-cell>
+      <md-cell *cdkCellDef="let row"> 
+        <button md-button (click)="openDialog('action', null, row.rdvId, row.rdvPrenom, row.contact)">
+          Supprimer</button>
+      </md-cell>
+    </ng-container>
+
+    <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+  </md-table>
+</div>

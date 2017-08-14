@@ -1,0 +1,38 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+2 info using npm@5.0.3
+3 info using node@v8.1.0
+4 verbose config Skipping project config: /usr/src/app/.npmrc. (matches userconfig)
+5 verbose run-script [ 'prestart', 'start', 'poststart' ]
+6 info lifecycle bonjour-ausyweb-bo@0.0.0~prestart: bonjour-ausyweb-bo@0.0.0
+7 silly lifecycle bonjour-ausyweb-bo@0.0.0~prestart: no script for prestart, continuing
+8 info lifecycle bonjour-ausyweb-bo@0.0.0~start: bonjour-ausyweb-bo@0.0.0
+9 verbose lifecycle bonjour-ausyweb-bo@0.0.0~start: unsafe-perm in lifecycle true
+10 verbose lifecycle bonjour-ausyweb-bo@0.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/usr/src/app/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+11 verbose lifecycle bonjour-ausyweb-bo@0.0.0~start: CWD: /usr/src/app
+12 silly lifecycle bonjour-ausyweb-bo@0.0.0~start: Args: [ '-c', 'ng serve -H 0.0.0.0' ]
+13 silly lifecycle bonjour-ausyweb-bo@0.0.0~start: Returned: code: 1  signal: null
+14 info lifecycle bonjour-ausyweb-bo@0.0.0~start: Failed to exec start script
+15 verbose stack Error: bonjour-ausyweb-bo@0.0.0 start: `ng serve -H 0.0.0.0`
+15 verbose stack Exit status 1
+15 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:283:16)
+15 verbose stack     at emitTwo (events.js:125:13)
+15 verbose stack     at EventEmitter.emit (events.js:213:7)
+15 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+15 verbose stack     at emitTwo (events.js:125:13)
+15 verbose stack     at ChildProcess.emit (events.js:213:7)
+15 verbose stack     at maybeClose (internal/child_process.js:887:16)
+15 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:208:5)
+16 verbose pkgid bonjour-ausyweb-bo@0.0.0
+17 verbose cwd /usr/src/app
+18 verbose Linux 4.9.27-moby
+19 verbose argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
+20 verbose node v8.1.0
+21 verbose npm  v5.0.3
+22 error code ELIFECYCLE
+23 error errno 1
+24 error bonjour-ausyweb-bo@0.0.0 start: `ng serve -H 0.0.0.0`
+24 error Exit status 1
+25 error Failed at the bonjour-ausyweb-bo@0.0.0 start script.
+25 error This is probably not a problem with npm. There is likely additional logging output above.
+26 verbose exit [ 1, true ]

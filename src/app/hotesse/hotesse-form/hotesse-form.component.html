@@ -1,96 +1,72 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <!-- Button Nouveau RDV & Lister RDV -->
-        <div class="form-group">
-          <button
-            class="btn btn-primary col-xs-12"
-            type="button"
-            [disabled]="f">Nouveau RDV</button>
-          <br><br><br>
-          <button
-            class="btn btn-primary col-xs-12"
-            type="button">Liste des RDV</button>
-        </div>
-        <br><br>
-        <div id="user-data" ngModelGroup="userData">
-          <!-- Civilité -->
-          <div class="form-group">
-            <label>Civilité</label>
-            <label class="radio-inline" *ngFor="let civilite of civilites">
-              <input
-                type="radio"
-                ngModel
-                name="civilite"
-                [value]="civilite"
-                required>{{ civilite }}
-            </label>
-          </div>
-          <!-- Prénom -->
-          <div class="form-group">
-            <label for="prenom_candidat">Prénom</label>
-            <input
-              type="text"
-              id="prenom_candidat"
-              class="form-control"
-              ngModel
-              name="prenom_candidat"
-              required
-              #prenom="ngModel">
-            <span class="help-block" *ngIf="!prenom.valid && prenom.touched">Veuillez entrer le prénom!</span>
-          </div>
-          <!-- Nom -->
-          <div class="form-group">
-            <label for="nom_candidat">Nom</label>
-            <input
-              type="text"
-              id="nom_candidat"
-              class="form-control"
-              ngModel
-              name="nom_candidat"
-              required
-              #nom="ngModel">
-            <span class="help-block" *ngIf="!nom.valid && nom.touched">Veuillez entrer le nom!</span>
-          </div>
-          <!-- Recruiteur -->
-          <div class="form-group">
-            <label for="nom_recruiteur">Reçu par</label>
-            <input
-              type="text"
-              id="nom_recruiteur"
-              class="form-control"
-              ngModel
-              name="nom_recruiteur"
-              required
-              #nom_recruiteur="ngModel">
-            <span class="help-block" *ngIf="!nom_recruiteur.valid && nom_recruiteur.touched">Veuillez entrer le nom d'un recruiteur!</span>
-          </div>
-        </div>
-        <!-- Time -->
-        <div class="form-group">
-          <label>Attendu à</label>
-          <select
-            id="hour"
-            ngModel
-            name="hour"
-            required>
-            <option *ngFor="let hour of hours">{{ hour }}</option>
-          </select>
-          <select
-            id="minute"
-            ngModel
-            name="minute"
-            required>
-            <option *ngFor="let minute of minutes">{{ minute }}</option>
-          </select>
-        </div>
-        <!-- Button Valider RDV -->
-        <button
-          class="btn btn-primary col-xs-12"
-          type="submit"
-          [disabled]="!f.valid">Valider le RDV</button>
-      </form>
+      <button class="btn btn-primary col-xs-12" type="button" 
+      [disabled]="true" (click)="clickButton('nouveauRDVbtn')">
+        Nouveau RDV
+      </button>
+      <br><br><br>
+      <button class="btn btn-primary col-xs-12" type="button" 
+      (click)="clickButton('listeDesRDVbtn')">
+        Liste des RDV
+      </button>
     </div>
   </div>
+</div>
+
+<br>
+<div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form [formGroup]="newRdvForm" (ngSubmit)="onSubmit()" #f>
+  
+      <!-- Civilité -->
+      <div class="form-group">
+        <label>Civilité</label>
+        <label class="radio-inline" *ngFor="let civilite of civilites">
+          <input type="radio" formControlName="civilite" [value]="civilite" (blur)="focusOutFunction('civilite')">
+            {{ civilite }}
+        </label>
+      </div>
+
+      <!-- Prénom -->
+      <div class="form-group">
+        <label for="prenom_candidat">Prénom</label>
+        <input class="form-control" formControlName="prenom_candidat" (blur)="focusOutFunction('prenom_candidat')">
+        <span class="help-block" *ngIf="!newRdvForm.get('prenom_candidat').valid && newRdvForm.get('prenom_candidat').touched">Veuillez entrer le prénom!</span>
+      </div>
+
+      <!-- Nom -->
+      <div class="form-group">
+        <label for="nom_candidat">Nom</label>
+        <input class="form-control" formControlName="nom_candidat" (blur)="focusOutFunction('nom_candidat')">
+        <span class="help-block" *ngIf="!newRdvForm.get('nom_candidat').valid && newRdvForm.get('nom_candidat').touched">Veuillez entrer le nom!</span>
+      </div>
+
+      <!-- Recruiteur -->
+      <div class="form-group">
+        <label for="nom_recruiteur">Reçu par</label>
+        <md-input-container>
+          <input type="text" class="form-control" mdInput formControlName="recruiteur" [mdAutocomplete]="auto">
+        </md-input-container>
+              
+        <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayFn">
+          <md-option *ngFor="let nom_recruiteur of filtered_nom_recruiteur | async" [value]="nom_recruiteur">
+            {{ nom_recruiteur.nom_manager }}
+          </md-option>
+        </md-autocomplete>
+      </div>
+
+      <!-- Time -->
+      <div class="form-group">
+        <label>Attendu à</label>
+        <select formControlName="hour" (blur)="focusOutFunction('hour')">
+          <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+        </select>
+        <select formControlName="minute" (blur)="focusOutFunction('minute')">
+          <option *ngFor="let minute of minutes" [value]="minute">{{ minute }}</option>
+        </select>
+      </div>
+
+      <!-- Button Valider RDV -->
+      <button class="btn btn-primary col-xs-12" type="submit" [disabled]="!newRdvForm.valid">Valider le RDV</button>
+    </form>
 </div>
